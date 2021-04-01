@@ -1,2 +1,2 @@
 # dataStructure
-数据结构
+go语言数据结构练习
