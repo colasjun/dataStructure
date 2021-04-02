@@ -34,6 +34,18 @@ func main()  {
 
 }
 
+/*func mergeSort(arr []int, len int)  {
+
+}
+
+func subMergeSort(arr []int, left,right int)  {
+	mid := (left + right) >> 1
+	subMergeSort(arr, left, mid)
+	subMergeSort(arr, mid, right)
+
+	merge()
+}*/
+
 func shellSort(arr []int, len int) []int {
 	// 先算出步长数组
 	step := len
@@ -41,17 +53,17 @@ func shellSort(arr []int, len int) []int {
 		step = step >> 1
 	}
 
-	fmt.Println(step)
 	for step > 0 {
-		// 快排
-		for i := 0; i < len; i += step {
-			//cur := i
-			//while cur
-			if arr[i] > arr[i+step] {
-				arr[i], arr[i+step] = arr[i+step],arr[i]
+		for col := 0; col < step; col ++ {
+			for begin := col + step; begin < len ; begin += step {
+				cur := begin
+				for cur > col && arr[cur] < arr[cur-step] {
+					arr[cur], arr[cur-step]= arr[cur-step], arr[cur]
+					cur -= step
+				}
 			}
 		}
-
+		//fmt.Println(step)
 		step >>= 1
 	}
 
