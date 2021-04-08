@@ -13,10 +13,7 @@ func main()  {
 
 	defer file.Close()
 
-
-
 	trace.Start(file)
-
 
 	go func() {
 		time.Sleep(time.Second * 2)

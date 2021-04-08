@@ -31,7 +31,13 @@ func main()  {
 	sort = shellSort(arr, len(arr))
 	verifySort(arr, sort)
 	fmt.Println("希尔排序后", sort)
-
+	hr()
+	arr = getArr(25)
+	fmt.Println("堆排序前", arr)
+	sort = heapSort(arr, len(arr))
+	verifySort(arr, sort)
+	fmt.Println("堆排序后", sort)
+	//printTree(sort, len(sort), 0, 0)
 }
 
 /*func mergeSort(arr []int, len int)  {
@@ -45,6 +51,105 @@ func subMergeSort(arr []int, left,right int)  {
 
 	merge()
 }*/
+/**
+如何打印一个完全二叉树
+---------------------------------------------------------------
+0 1 2 3 4 5 6 7 8
+ */
+func printTree(arr []int, n,i,times int)  {
+	// 用栈？？？？
+
+
+	if i >= n - 1 {
+		return
+	}
+
+	times++
+
+	if i == 0 {
+		// 打印树根
+		fmt.Printf("    %d    ", arr[i])
+		fmt.Println()
+	}
+
+	c1 := i * 2 + 1
+	c2 := i * 2 + 2
+
+	if c1 < n {
+		// 打印左子树
+		fmt.Printf("    %d    ", arr[c1])
+	}
+	if c2 < n {
+		// 打印右子树
+		fmt.Printf("    %d    ", arr[c2])
+
+		fmt.Printf("(%d)(%d)(%d)", c2, times, power(2, times + 1) - 2)
+		// 换行
+		if power(2, times + 1) - 2 == c2 {
+			println()
+		}
+	}
+
+	printTree(arr, n, c1, times)
+	printTree(arr, n, c2, times)
+}
+
+
+func power(n,m int) int {
+	for i := 1;i < m;i++ {
+		n *= n
+	}
+
+	return n
+}
+
+func heapSort(arr []int, len int) []int {
+	maxParent := (len - 1 - 1) / 2
+	for i := maxParent; i >= 0 ; i-- {
+		heapify(arr, len,i)
+	}
+	//heapify(arr, len,0)
+
+	for i := len - 1 ; i >= 0 ; i -- {
+		arr[0],arr[i] = arr[i],arr[0]
+
+		heapify(arr, i, 0)
+	}
+
+	return arr
+}
+
+func heapify(arr []int, n,i int) {
+	if i >= n {
+		return
+	}
+
+	c1 := 2 * i + 1
+	c2 := 2 * i + 2
+
+	maxIndex := i
+
+	if c1 < n && arr[c1] > arr[maxIndex] {
+		maxIndex = c1
+	}
+
+	if c2 < n && arr[c2] > arr[maxIndex] {
+		maxIndex = c2
+	}
+
+	if maxIndex != i {
+		swap(arr, maxIndex, i)
+		heapify(arr, n, maxIndex)
+	}
+}
+
+func swap(arr []int, i,j int)  {
+	arr[i],arr[j] = arr[j],arr[i]
+}
+
+/*
+----------------------------------------------------------------------------
+ */
 
 func shellSort(arr []int, len int) []int {
 	// 先算出步长数组
