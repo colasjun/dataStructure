@@ -126,6 +126,28 @@ func main() {
 	fmt.Println("翻转链表前链后----------:")
 	printNode(prev)
 
+	fmt.Printf("递归翻转前-----: \n")
+	printNode(prev)
+
+	list := recursionRevertLinkList(prev)
+
+	fmt.Println("递归翻转后")
+	printNode(list)
+}
+
+// 递归翻转单链表
+func recursionRevertLinkList(node *ListNode)  *ListNode {
+	// 递归首先确定的是返回
+	if node == nil || node.next == nil {
+		return node
+	}
+
+	// 依次递归 实际上从链表的最后开始
+	newHead := recursionRevertLinkList(node.next)
+	node.next.next = node
+	node.next = nil
+
+	return  newHead
 }
 
 func printNode(node *ListNode) {

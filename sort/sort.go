@@ -7,38 +7,125 @@ import (
 )
 
 func main()  {
+	arr := getArr(100000)
+	fmt.Printf("排序时间比较.元素一共%d 其中前面3个元素为%d %d %d", len(arr), arr[0], arr[1], arr[2])
+
+	arr1 := getSameArr(arr)
+	arr2 := getSameArr(arr)
+	arr3 := getSameArr(arr)
+	arr4 := getSameArr(arr)
+	arr5 := getSameArr(arr)
+	arr6 := getSameArr(arr)
+	//arr7 := arr
+
 	hr()
-	arr := getArr(25)
-	fmt.Println("冒泡排序前", arr)
-	sort := bubbleSort(arr, len(arr))
-	verifySort(arr, sort)
-	fmt.Println("冒泡排序后", sort)
+	//fmt.Println("冒泡排序前", arr)
+	start := time.Now().UnixNano()  / 1e6
+	fmt.Printf("冒泡其中前面3个元素为%d %d %d \n", arr1[0], arr1[1], arr1[2])
+	sort := bubbleSort(arr1, len(arr1))
+	fmt.Printf("冒泡排序执行时间:%d 毫秒 \n",  time.Now().UnixNano() / 1e6 - start)
+	verifySort(arr1, sort)
+	//fmt.Println("冒泡排序后", sort)
 	hr()
-	arr = getArr(25)
-	fmt.Println("选择排序前", arr)
-	sort = selectSort(arr, len(arr))
-	verifySort(arr, sort)
-	fmt.Println("选择排序后", sort)
+	//fmt.Println("选择排序前", arr)
+	start = time.Now().UnixNano()  / 1e6
+	fmt.Printf("选择其中前面3个元素为%d %d %d \n", arr2[0], arr2[1], arr2[2])
+	sort = selectSort(arr2, len(arr2))
+	fmt.Printf("选择排序执行时间:%d 毫秒 \n",  time.Now().UnixNano() / 1e6 - start)
+	verifySort(arr2, sort)
+	//fmt.Println("选择排序后", sort)
 	hr()
-	arr = getArr(25)
-	fmt.Println("插入排序前", arr)
-	sort = insertSort(arr, len(arr))
-	verifySort(arr, sort)
-	fmt.Println("插入排序后", sort)
+	start = time.Now().UnixNano()  / 1e6
+	fmt.Printf("插入其中前面3个元素为%d %d %d \n", arr3[0], arr3[1], arr3[2])
+	//fmt.Println("插入排序前", arr3)
+	sort = insertSort(arr3, len(arr3))
+	fmt.Printf("插入排序执行时间:%d 毫秒 \n", time.Now().UnixNano() / 1e6 - start)
+	verifySort(arr3, sort)
+	//fmt.Println("插入排序后", sort)
 	hr()
-	arr = getArr(25)
-	fmt.Println("希尔排序前", arr)
-	sort = shellSort(arr, len(arr))
-	verifySort(arr, sort)
-	fmt.Println("希尔排序后", sort)
+	start = time.Now().UnixNano()  / 1e6
+	fmt.Printf("希尔其中前面3个元素为%d %d %d \n", arr4[0], arr4[1], arr4[2])
+	//fmt.Println("希尔排序前", arr4)
+	sort = shellSort(arr4, len(arr4))
+	fmt.Printf("希尔排序执行时间:%d 毫秒 \n",  time.Now().UnixNano() / 1e6 - start)
+	verifySort(arr4, sort)
+	//fmt.Println("希尔排序后", sort)
 	hr()
-	arr = getArr(25)
-	fmt.Println("堆排序前", arr)
-	sort = heapSort(arr, len(arr))
-	verifySort(arr, sort)
-	fmt.Println("堆排序后", sort)
-	//printTree(sort, len(sort), 0, 0)
+	//arr = getArr(25)
+	start = time.Now().UnixNano()  / 1e6
+	fmt.Printf("堆其中前面3个元素为%d %d %d \n", arr5[0], arr5[1], arr5[2])
+	//fmt.Println("堆排序前", arr)
+	sort = heapSort(arr5, len(arr5))
+	fmt.Printf("堆排序执行时间:%d 毫秒 \n",  time.Now().UnixNano() / 1e6 - start)
+	verifySort(arr5, sort)
+	//fmt.Println("堆排序后", sort)
+	hr()
+	start = time.Now().UnixNano()  / 1e6
+	fmt.Printf("快排其中前面3个元素为%d %d %d \n", arr6[0], arr6[1], arr6[2])
+	//arr = getArr(25)
+	//fmt.Println("快排序前", arr)
+	sort = quickSort(arr6, 0, len(arr6) - 1)
+	fmt.Printf("快排执行时间:%d 毫秒 \n",  time.Now().UnixNano() / 1e6 - start)
+	verifySort(arr6, sort)
+	//fmt.Println("快排序后", sort)
 }
+
+func getSameArr(arr []int) []int  {
+	re := make([]int, len(arr))
+	copy(re, arr)
+	return re
+}
+
+/**
+----------------------------------------------------------------
+ */
+func quickSort(arr []int, start int, end int) []int {
+	// 递归条件
+	if start < end {
+		// 轴点元素
+		left := start
+		right := end
+
+		pointVal := arr[left]
+
+		// 双指针
+		for left < right {
+			for left < right {
+				if arr[right] < pointVal {
+					arr[left] = arr[right]
+					left++
+					break
+				} else {
+					// 右边大于不动 指针--
+					right--
+				}
+			}
+
+			for left < right {
+				if arr[left] >= pointVal {
+					arr[right] = arr[left]
+					right--
+					break
+				} else {
+					// 右边大于不动 指针--
+					left++
+				}
+			}
+		}
+
+		arr[left] = pointVal
+		//fmt.Println(start, left,end)
+		//return arr
+		quickSort(arr, start, left-1)
+		quickSort(arr, left+1, end)
+
+	}
+	return arr
+}
+
+/**
+----------------------------------------------------------------
+*/
 
 /*func mergeSort(arr []int, len int)  {
 
@@ -57,9 +144,6 @@ func subMergeSort(arr []int, left,right int)  {
 0 1 2 3 4 5 6 7 8
  */
 func printTree(arr []int, n,i,times int)  {
-	// 用栈？？？？
-
-
 	if i >= n - 1 {
 		return
 	}
