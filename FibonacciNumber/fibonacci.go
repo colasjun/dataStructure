@@ -9,7 +9,7 @@ import (
 
 func main()  {
 
-	file, _ := os.Create("./Fibonacci.trace")
+	file, _ := os.Create("./FibonacciNumber.trace")
 
 	defer file.Close()
 
