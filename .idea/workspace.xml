@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca32bae-4658-4289-8c5f-3ba76383a38d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/deleteRepeatNum/deleteRepeatNum.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sqrt/sqrt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/array/RemoveDuplicatesFromSortedArray.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
